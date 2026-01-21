@@ -6,6 +6,39 @@
     <title>Document</title>
 </head>
 <body>
-<h3>my namei s bibak </h3>
+    <h1>NEw user login</h1>
+
+        <div class="user-name">
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="password">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div class="submit-btn">
+            <input type="submit" value="Login" onclick="handleSubmit(event)">
+        </div>
 </body>
+<script>
+const Username = document.getElementById('username');
+const Password = document.querySelector('.password input');
+const SubmitBtn = document.querySelector('.submit-btn input');
+const UserList = [];
+const NewUser = {
+    username: '',
+    password: ''
+
+};
+function handleSubmit(e){
+    e.preventDefault();
+    
+    NewUser.username = Username.value;
+    NewUser.password = Password.value;
+    console.log(NewUser);
+    UserList.push([...Object.values(NewUser)]);
+    console.log(UserList);
+};
+
+</script>
 </html>

@@ -52,6 +52,7 @@ function outerFunction() {
   innerFunction();
   console.log(value1);
 }
+
 outerFunction();
 console.log(value2);
 //(...) default parameters .... not jsust functiion any thing with curley braces  (cost function and normal funcion)hoisting
