@@ -1,36 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .card{
-
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #383434;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .lists {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .edit,
+      .delete {
+        cursor: pointer;
+        padding: 5px 10px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        font-size: 0.9em;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
+  </head>
+  <body>
+    <h1>DC heros</h1>
+    <ul class="container">
+      <div class="lists">
+        <li class="li-list">Superman</li>
+        <div class="edit"><=</div>
+        <div class="delete">X</div>
+      </div>
+    </ul>
+  </body>
+  <script>
+    const container = document.querySelector(".container");
+    // function addHeros(hero) {
+    //   const listItem = document.createElement("li");
+    //   listItem.classList.add("list");
+    //   listItem.textContent = hero; //innerText innerHTML
+    //   container.appendChild(listItem);
+    // }
+    addHeros("Batman");
+    addHeros("Flash");
+    addHeros("Wonder Woman");
 
-    </div>
-</body>
-<script>
-    const container = document.querySelector('.container');
-    const card= document.createElement('div');
-        card.classList.add('card');
-        // card.classList.remove('card');
-        // card.classList.toggle('card');
-        card.textContent = 'This is a dynamically created card.';
-        card.style.width = '200px';
-        card.style.height = '100px';
-        const header = document.createElement('h2');
-        header.textContent = 'Card Title';
-        card.appendChild(header);
-        const paragraph = document.createElement('p');
-    paragraph.textContent = 'This is some description inside the card.';
-    card.appendChild(paragraph);
+    function addHeros(hero) {
+      const listItem = ` <div class="lists">
+        <li class="li-list">${hero}</li>
+        <div class="edit"><=</div>
+        <div class="delete">X</div>
+      </div>`;
+      container.innerHTML += listItem;
+    }
+    const lists = document.querySelectorAll(".lists");
+    lists.forEach((list) => {
+      const deleteBtn = list.querySelector(".delete");
+      deleteBtn.addEventListener("click", () => {
+        console.log("You clicked me");
+        list.remove();
+      });
+      const editBtn = list.querySelector(".edit");
+      console.log(list);
+      //   editBtn.addEventListener("click", () => {
+      //     const listItem = list.querySelector(".li-list");
+      //     const newName = prompt("Enter new name", listItem.textContent);
+      //     if (newName) {
+      //       listItem.textContent = newName;
+      //     }
+      //   });
 
-    document.body.appendChild(card);
-</script>
+      //next way
+      editBtn.addEventListener("click", () => {
+        const listItem = list.querySelector(".li-list");
+        const inputField = document.createElement("input");
+        inputField.type = "text";
+        inputField.value = listItem.textContent;
+        console.log(inputField);
+        // list.replaceChild(inputField, listItem);
+        listItem.replaceWith(inputField);
+        inputField.focus();
+        inputField.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            if (inputField.value.trim() !== "") {
+              listItem.textContent = inputField.value;
+              inputField.replaceWith(listItem);
+            } else {
+              alert("Name cannot be empty");
+            }
+          }
+        });
+      });
+    });
+  </script>
 </html>

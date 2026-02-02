@@ -47,6 +47,7 @@ Object.keys(object1).forEach((key) => {
 
 //for each with array
 const array = [10, 20, 30, 40, 50];
+
 array.forEach((element, index) => {
   console.log("Index " + index + ": " + element);
 });
